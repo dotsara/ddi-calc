@@ -1,0 +1,26 @@
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 900px) {
+  html { font-size: 15px; }
+}
+@media (max-width: 400px) {
+  html { font-size: 13px; }
+}
+
+body {
+}
+
+header {
+  background: #FC5000;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  outline: 2px solid #fcce00;
+  padding: .2rem 0;
+  text-align: center;
+}
+
+section {
+  margin: 0 .5rem;
+}

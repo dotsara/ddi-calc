@@ -1,0 +1,32 @@
+/* I probably won't use this file, but I'm not ready to delete it just yet */
+{ "menu": [   
+    "food": {   
+      "deluxe" : 3.10,
+      "special" : 2.00,
+      "cheeseburger" : 1.75,
+      "hamburger" : 1.40,
+      "fries" : 1.75,
+    },
+    "drinks": {
+      "shakes" : 2.50,
+      "milk" : 1.25,
+      "smallsoda" : 1.40,
+      "mediumsoda" : 1.70,
+      "largesoda" : 1.90,
+      "rootbeerfloat" : 2.50,
+      "coffee" : 1.25,
+      "hotchocolate" : 1.25
+    },
+    "ice cream": {
+      "icecreamsundae": 2.30,
+      "kidcone" : 1.30,
+      "singlecone" : 1.90,
+      "doublecone" : 2.80,
+    },
+    "condiments": {
+      "onions" : 0.05,
+      "ketchup" : 0.05,
+      "tartarsauce" : 0.05,
+    }
+  ]
+}
