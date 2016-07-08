@@ -33,6 +33,9 @@ var menuArray = [
 ];
 var localTax = 0.096;
 
+var $orderTotalSpan = $('.order-total');
+var $orderTotalNumber = $('.order-total').text();
+
 // how much would it cost to order 1 of every item on the menu?
 // (without tax)
 var totalUpAllItems = function(itemsArray) {
@@ -45,9 +48,15 @@ var totalUpAllItems = function(itemsArray) {
 };
 
 // It feels like this one's a bit fussier than it needs to be.
+// 08-July: ah! they might not actually charge tax! Research trip
+// in the works…
 var totalWithTax = function(currentTotal) {
   return (Number(currentTotal) + (currentTotal * localTax)).toFixed(2);
 };
+
+/*
+    where the party's at!
+*/
 
 $(document).ready(function() {
   console.log("hiyee, document's ready");
@@ -58,6 +67,52 @@ $(document).ready(function() {
   console.log("and with tax?");
   // not gonna lie that is a little bit ugly. (: 
   console.log(totalWithTax(totalUpAllItems(allItemsCost)));
+  
+  console.log("$orderTotalNumber is: ", $orderTotalNumber);
+  
+  // when a user clicks a menu item… first we'll report `this` to the console
+  $( ".menu" ).on( "click", "a", function() {
+    console.log( $( this ).text() );
+    console.log( $(this).data());
+    
+    console.log("$(this) is: ", $(this));
+    console.log("$(this).data() is: ", $(this).data());
+    console.log("$(this).data('name') is: ", $(this).data('name'));
+    // right that's not going to work because "cost" doesn't exist in 
+    // index.html--it's only here in the javascript file so far.
+    //console.log("$(this).data('cost') is: ", $(this).data('cost'));
+    var value = $(this).data('name');
+    // not sure how to make use of this for my ends, but I'm going to
+    // keep it around for the moment… 
+    // for ( value in menuArray ) {
+    //   console.log("value is: ", value);
+    //   console.log("found it!");
+    // };
+
+    console.log("value is: ", value);
+    console.log(checkAvailability(menuArray, value));
+    console.log("checked");
+
+    // messing around
+    for (var index = 0; index < menuArray.length; index++) {
+      // just doing these to see if I'm even doing them right.
+      // console.log("menuArray[index]: ", menuArray[index]);
+      // console.log("menuArray[index].name: ", menuArray[index].name);
+      // console.log("menuArray[index].cost: ", menuArray[index].cost);
+      // I AM!! 
+      
+      if (menuArray[index].name === value) {
+        console.log("YES! menuArray[index].name is: " + menuArray[index].name + "; and value is: " + value);
+        console.log("$orderTotalNumber is: ", $orderTotalNumber);
+        $orderTotalNumber = Number($orderTotalNumber + menuArray[index].cost);
+        console.log("and now $orderTotalNumber is: ", $orderTotalNumber);
+        $orderTotalSpan.text($orderTotalNumber);
+        break;
+      };
+
+    };
+
+  });
 });
 
 // HELPER METHODS
@@ -73,8 +128,6 @@ var allItemsNames = menuArray.map(function(menuName) {
 var allItemsCost = menuArray.map(function(menuCost) {
   return menuCost.cost.toFixed(2);
 });
-
-
 
 // stuff I'm keeping around but folding up so it's out of the way
 

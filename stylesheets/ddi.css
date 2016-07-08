@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  text-align: center;
 }
 
 header {
@@ -23,4 +24,24 @@ header {
 
 section {
   margin: 0 .5rem;
+  text-align: left;
+}
+
+footer {
+  font-size: .9rem;
+  text-align: center;
+}
+
+/*
+  messing around.
+*/
+
+dd > a {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+dd > a:hover {
+  background: pink;
 }
