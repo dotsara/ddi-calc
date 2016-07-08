@@ -103,7 +103,7 @@ $(document).ready(function() {
         console.log("$orderTotalNumber is: ", $orderTotalNumber);
         $orderTotalNumber = Number($orderTotalNumber + menuArray[index].cost);
         console.log("and now $orderTotalNumber is: ", $orderTotalNumber);
-        $orderTotalSpan.text($orderTotalNumber);
+        $orderTotalSpan.text($orderTotalNumber.toFixed(2));
         break;
       };
 
@@ -127,7 +127,6 @@ var allItemsCost = menuArray.map(function(menuCost) {
 });
 
 // stuff I'm keeping around but folding up so it's out of the way
-
 
 var menu = {
   "deluxe" : 3.10,

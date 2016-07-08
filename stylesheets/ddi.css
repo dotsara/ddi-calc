@@ -32,9 +32,9 @@ footer {
   text-align: center;
 }
 
-/*
-  messing around.
-*/
+dd {
+  margin-bottom: .3rem;
+}
 
 dd > a {
   color: blue;
@@ -43,5 +43,9 @@ dd > a {
 }
 
 dd > a:hover {
-  background: pink;
+  background: #fcce00;
+}
+
+.total p {
+  font-weight: bold;
 }
