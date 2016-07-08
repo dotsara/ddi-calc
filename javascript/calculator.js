@@ -88,10 +88,7 @@ $(document).ready(function() {
     //   console.log("value is: ", value);
     //   console.log("found it!");
     // };
-
     console.log("value is: ", value);
-    console.log(checkAvailability(menuArray, value));
-    console.log("checked");
 
     // messing around
     for (var index = 0; index < menuArray.length; index++) {
