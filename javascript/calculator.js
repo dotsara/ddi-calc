@@ -110,6 +110,12 @@ $(document).ready(function() {
     };
 
   });
+
+  $(".clear-order").on("click", "button", function(event){
+    event.preventDefault;
+    location.reload();
+  });
+
 });
 
 // HELPER METHODS
