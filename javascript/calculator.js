@@ -35,6 +35,7 @@ var localTax = 0.096;
 
 var $orderTotalSpan = $('.order-total');
 var $orderTotalNumber = $('.order-total').text();
+var $orderItems = $('.order-items');
 
 // how much would it cost to order 1 of every item on the menu?
 // (without tax)
@@ -72,10 +73,8 @@ $(document).ready(function() {
   
   // when a user clicks a menu item… first we'll report `this` to the console
   $( ".menu" ).on( "click", "a", function() {
-    console.log( $( this ).text() );
-    console.log( $(this).data());
-    
     console.log("$(this) is: ", $(this));
+    console.log("$(this).text(): " + $(this).text());
     console.log("$(this).data() is: ", $(this).data());
     console.log("$(this).data('name') is: ", $(this).data('name'));
     // right that's not going to work because "cost" doesn't exist in 
@@ -97,13 +96,14 @@ $(document).ready(function() {
       // console.log("menuArray[index].name: ", menuArray[index].name);
       // console.log("menuArray[index].cost: ", menuArray[index].cost);
       // I AM!! 
-      
+
       if (menuArray[index].name === value) {
         console.log("YES! menuArray[index].name is: " + menuArray[index].name + "; and value is: " + value);
         console.log("$orderTotalNumber is: ", $orderTotalNumber);
         $orderTotalNumber = Number($orderTotalNumber + menuArray[index].cost);
         console.log("and now $orderTotalNumber is: ", $orderTotalNumber);
         $orderTotalSpan.text($orderTotalNumber.toFixed(2));
+        $($orderItems).append(menuArray[index].name + ", ").val();
         break;
       };
 
