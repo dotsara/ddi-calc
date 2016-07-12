@@ -1,3 +1,5 @@
+:star2: one of my 100 projects :star2:
+
 # Dick's Drive-in Calculator
 
 [Dick's Drive-In](http://www.ddir.com/) is a Seattle institution; a simple menu and an endless source of juvenile jokes, Seattle loves its Dick's.
