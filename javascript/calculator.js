@@ -7,13 +7,11 @@
 // when an item is clicked, the total (with tax) should update on the screen
 // there should be a "current order" list showing clicked item quantities & cost
 
-// starting out very very basic
-
 var menuArray = [
   {"name":"deluxe", "cost": 3.10},
   {"name":"special", "cost": 2.00},
   {"name":"cheeseburger", "cost": 1.75},
-  {"name":"hamburger", "cost": 1.40},
+  {"name":"regular hamburger", "cost": 1.40},
   {"name":"fries", "cost": 1.75},
   {"name":"shakes", "cost": 2.50},
   {"name":"milk", "cost": 1.25},
@@ -70,6 +68,8 @@ $(document).ready(function() {
   console.log(totalWithTax(totalUpAllItems(allItemsCost)));
   
   console.log("$orderTotalNumber is: ", $orderTotalNumber);
+  console.log("$orderItems is: ", $orderItems);
+  console.log("$orderItems[0].childNodes is: ", $orderItems[0].childNodes);
   
   // when a user clicks a menu item… first we'll report `this` to the console
   $( ".menu" ).on( "click", "a", function() {
@@ -103,7 +103,20 @@ $(document).ready(function() {
         $orderTotalNumber = Number($orderTotalNumber + menuArray[index].cost);
         console.log("and now $orderTotalNumber is: ", $orderTotalNumber);
         $orderTotalSpan.text($orderTotalNumber.toFixed(2));
-        $($orderItems).append(menuArray[index].name + ", ").val();
+        console.log("----------");
+        console.log("does $orderItems have anything in it?");
+        console.log("$orderItems[0].childNodes is: ", $orderItems[0].childNodes);
+        console.log("$orderItems[0].childNodes.length is: ", $orderItems[0].childNodes.length);
+        // this is the thing that adds the current item to the list
+        if ($orderItems[0].childNodes.length === 0) {
+          $($orderItems).append(menuArray[index].name).val();
+        } else {
+          $($orderItems).append(", " + menuArray[index].name).val();
+        };
+        // now I'm reporting it back to myself and checking .length again
+        console.log("item addeded! " + menuArray[index].name);
+        console.log("$orderItems[0].childNodes.length is: ", $orderItems[0].childNodes.length);
+        console.log("----------");
         break;
       };
 
@@ -132,6 +145,31 @@ var allItemsCost = menuArray.map(function(menuCost) {
   return menuCost.cost.toFixed(2);
 });
 
+/*
+
+  so I think I want to add a helper function that checks whether to add
+  a comma before the current item that's being added to the list. 
+
+  I think I can do that by checking childNodes.length--
+
+  * if it's 0: don't add a comma before and nothing after
+  * if it's 1: don't add a comma, but add "and [current item]"
+  * if it's > 2: add a comma before and the current item
+
+  of course the trick is… how to replace the "and" from when there
+  were just 2 items… 
+
+  I started playing around with this, but moved it down here for now
+        // I will refactor this into a helper function
+        var orderItemsHasContent = $orderItems[0].childNodes.length;
+        if (orderItemsHasContent === 0) {
+          $($orderItems).append(menuArray[index].name).val();
+        } else if (orderItemsHasContent === 1) {
+          $($orderItems).append(" and " + menuArray[index].name).val();
+        } else if (orderItemsHasContent >= 2) {
+          $($orderItems).append(", " + menuArray[index].name).val();
+        };
+*/
 // stuff I'm keeping around but folding up so it's out of the way
 
 var menu = {
