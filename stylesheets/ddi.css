@@ -3,14 +3,18 @@ html {
 }
 
 @media (max-width: 900px) {
-  html { font-size: 15px; }
+  html { font-size: 17px; }
 }
 @media (max-width: 400px) {
-  html { font-size: 13px; }
+  html { font-size: 14px; }
 }
 
 body {
   text-align: center;
+}
+
+a:visited {
+  color: #909;
 }
 
 header {
@@ -32,26 +36,33 @@ footer {
   text-align: center;
 }
 
-dd {
-  
-  margin: 0 0 .3rem 0;
+.menu ul {
+  display: block;
+  list-style-type: none;
+  margin: 1rem 1rem 1rem 0;
+  overflow: hidden;
+  -webkit-padding-start: 0;
 }
 
-dd > a {
-  color: blue;
+.menu ul > li {
+  float: left;
+  padding: 0;
+}
+
+li > a {
+  color: #FC5000;
   cursor: pointer;
+  display: inline-block;
+  padding: .8rem;
   text-decoration: underline;
+  width: 140px;
 }
 
-dd > a:hover {
-  background: #fcce00;
+li > a:hover {
+  background: #FC5000;
+  color: #fcce00;
 }
 
 .total p {
   font-weight: bold;
-}
-
-.order-items-count,
-.order-items-count-number {
-  display: none;
 }
