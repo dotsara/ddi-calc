@@ -1,4 +1,4 @@
-:star2: one of my 100 projects :star2:
+:star2: [one of my 100 projects](https://github.com/dotsara/100-projects) :star2:
 
 # Dick's Drive-in Calculator
 
