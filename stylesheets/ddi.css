@@ -27,8 +27,8 @@ header {
 }
 
 section {
-  margin: 0 .5rem;
-  text-align: left;
+  margin: 0 auto;
+  max-width: 35rem;
 }
 
 footer {
@@ -36,33 +36,48 @@ footer {
   text-align: center;
 }
 
-.menu ul {
-  display: block;
-  list-style-type: none;
-  margin: 1rem 1rem 1rem 0;
-  overflow: hidden;
-  -webkit-padding-start: 0;
+.total {
+  background: #fff;
+  text-align: left;
 }
 
-.menu ul > li {
-  float: left;
+.total > p {
+  font-weight: bold;
+  padding: 0 .8rem;
+}
+
+.menu {
+  text-align: left;
+}
+
+.menu dt {
+  padding: 0 0 .2rem .8rem;
+}
+
+.menu dl > dd {
+  display: inline-block;
   padding: 0;
+  -webkit-margin-start: 0;
 }
 
-li > a {
+.menu dl > dt {
+  display: block;
+}
+
+.menu dd + dt {
+  margin-top: 2rem;
+}
+
+.menu dd > a {
   color: #FC5000;
   cursor: pointer;
   display: inline-block;
   padding: .8rem;
   text-decoration: underline;
-  width: 140px;
+  width: 9rem;
 }
 
-li > a:hover {
+.menu dd > a:hover {
   background: #FC5000;
   color: #fcce00;
-}
-
-.total p {
-  font-weight: bold;
 }

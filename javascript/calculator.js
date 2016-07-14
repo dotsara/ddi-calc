@@ -1,11 +1,15 @@
 "use strict";
 
-// GOAL
-//
-// users can click menu items for the cost of an order at Dick's Drive-In
+/* 
+  Gooooooal! 
+  - users can click menu items for the cost of an order at Dick's
+    Drive-In
 
-// when an item is clicked, the total (with tax) should update on the screen
-// there should be a "current order" list showing clicked item quantities & cost
+  When an item is clicked, an order total (cost) should be displayed
+  and updated as users click more items. Additionally, there should be
+  a list of items updated _as_ users click, e.g. cheeseburger, fries,
+  shakes, ketchup…
+*/
 
 var menuArray = [
   {"name":"deluxe", "cost": 3.10},
@@ -29,97 +33,37 @@ var menuArray = [
   {"name":"ketchup", "cost": 0.05},
   {"name":"tartar sauce", "cost": 0.05},
 ];
-var localTax = 0.096;
 
+// span tags where I'll be updating information as users click items
 var $orderTotalSpan = $('.order-total');
 var $orderTotalNumber = $('.order-total').text();
 var $orderItems = $('.order-items');
 
-// how much would it cost to order 1 of every item on the menu?
-// (without tax)
-var totalUpAllItems = function(itemsArray) {
-  var totalOfItems = 0;
-  for (var index = 0; index < itemsArray.length; index++) {
-    totalOfItems = totalOfItems + Number(itemsArray[index]);
-  };
-
-  return totalOfItems.toFixed(2);
-};
-
-// It feels like this one's a bit fussier than it needs to be.
-// 08-July: ah! they might not actually charge tax! Research trip
-// in the works…
-var totalWithTax = function(currentTotal) {
-  return (Number(currentTotal) + (currentTotal * localTax)).toFixed(2);
-};
-
-/*
-    where the party's at!
-*/
-
 $(document).ready(function() {
-  console.log("hiyee, document's ready");
-  console.log("menu items! ", allItemsNames);
-  console.log("menu item costs! ", allItemsCost);
-  console.log("what would it cost to order 1 of each item? (without tax)");
-  console.log(totalUpAllItems(allItemsCost));
-  console.log("and with tax?");
-  // not gonna lie that is a little bit ugly. (: 
-  console.log(totalWithTax(totalUpAllItems(allItemsCost)));
-  
-  console.log("$orderTotalNumber is: ", $orderTotalNumber);
-  console.log("$orderItems is: ", $orderItems);
-  console.log("$orderItems[0].childNodes is: ", $orderItems[0].childNodes);
-  
-  // when a user clicks a menu item… first we'll report `this` to the console
+  console.log("Hi! We're ready to take your order. (: ");
+  // when a user clicks a menu item, its cost is added to the total and
+  // its name is added to the "your order" list
   $( ".menu" ).on( "click", "a", function() {
-    console.log("$(this) is: ", $(this));
-    console.log("$(this).text(): " + $(this).text());
-    console.log("$(this).data() is: ", $(this).data());
-    console.log("$(this).data('name') is: ", $(this).data('name'));
-    // right that's not going to work because "cost" doesn't exist in 
-    // index.html--it's only here in the javascript file so far.
-    //console.log("$(this).data('cost') is: ", $(this).data('cost'));
     var value = $(this).data('name');
-    // not sure how to make use of this for my ends, but I'm going to
-    // keep it around for the moment… 
-    // for ( value in menuArray ) {
-    //   console.log("value is: ", value);
-    //   console.log("found it!");
-    // };
-    console.log("value is: ", value);
 
-    // messing around
     for (var index = 0; index < menuArray.length; index++) {
-      // just doing these to see if I'm even doing them right.
-      // console.log("menuArray[index]: ", menuArray[index]);
-      // console.log("menuArray[index].name: ", menuArray[index].name);
-      // console.log("menuArray[index].cost: ", menuArray[index].cost);
-      // I AM!! 
-
       if (menuArray[index].name === value) {
-        console.log("YES! menuArray[index].name is: " + menuArray[index].name + "; and value is: " + value);
-        console.log("$orderTotalNumber is: ", $orderTotalNumber);
         $orderTotalNumber = Number($orderTotalNumber + menuArray[index].cost);
-        console.log("and now $orderTotalNumber is: ", $orderTotalNumber);
         $orderTotalSpan.text($orderTotalNumber.toFixed(2));
-        console.log("----------");
-        console.log("does $orderItems have anything in it?");
-        console.log("$orderItems[0].childNodes is: ", $orderItems[0].childNodes);
-        console.log("$orderItems[0].childNodes.length is: ", $orderItems[0].childNodes.length);
-        // this is the thing that adds the current item to the list
+        
+        // Adding a comma only when the list is > 1 item
         if ($orderItems[0].childNodes.length === 0) {
           $($orderItems).append(menuArray[index].name).val();
         } else {
           $($orderItems).append(", " + menuArray[index].name).val();
         };
-        // now I'm reporting it back to myself and checking .length again
-        console.log("item addeded! " + menuArray[index].name);
-        console.log("$orderItems[0].childNodes.length is: ", $orderItems[0].childNodes.length);
-        console.log("----------");
+
+        console.log("You added a " + menuArray[index].name + " to your order.");
+        // yes "a onions" sounds silly, but I can live with. FOR NOW.
+
+        // dropping out of the if because if it's true: we're done!
         break;
       };
-
     };
 
   });
@@ -133,10 +77,10 @@ $(document).ready(function() {
 
 // HELPER METHODS
 
-/*
-  arrays of the menu item names and costs, which can then be used later
-  as needed.
+/* 
+  arrays of menu item names and costs, to be used as needed
 */
+
 var allItemsNames = menuArray.map(function(menuName) {
   return menuName.name;
 });
@@ -144,53 +88,3 @@ var allItemsNames = menuArray.map(function(menuName) {
 var allItemsCost = menuArray.map(function(menuCost) {
   return menuCost.cost.toFixed(2);
 });
-
-/*
-
-  so I think I want to add a helper function that checks whether to add
-  a comma before the current item that's being added to the list. 
-
-  I think I can do that by checking childNodes.length--
-
-  * if it's 0: don't add a comma before and nothing after
-  * if it's 1: don't add a comma, but add "and [current item]"
-  * if it's > 2: add a comma before and the current item
-
-  of course the trick is… how to replace the "and" from when there
-  were just 2 items… 
-
-  I started playing around with this, but moved it down here for now
-        // I will refactor this into a helper function
-        var orderItemsHasContent = $orderItems[0].childNodes.length;
-        if (orderItemsHasContent === 0) {
-          $($orderItems).append(menuArray[index].name).val();
-        } else if (orderItemsHasContent === 1) {
-          $($orderItems).append(" and " + menuArray[index].name).val();
-        } else if (orderItemsHasContent >= 2) {
-          $($orderItems).append(", " + menuArray[index].name).val();
-        };
-*/
-// stuff I'm keeping around but folding up so it's out of the way
-
-var menu = {
-  "deluxe" : 3.10,
-  "special" : 2.00,
-  "cheeseburger" : 1.75,
-  "hamburger" : 1.40,
-  "fries" : 1.75,
-  "shakes" : 2.50,
-  "milk" : 1.25,
-  "smallsoda" : 1.40,
-  "mediumsoda" : 1.70,
-  "largesoda" : 1.90,
-  "rootbeerfloat" : 2.50,
-  "coffee" : 1.25,
-  "hotchocolate" : 1.25,
-  "icecreamsundae": 2.30,
-  "kidcone" : 1.30,
-  "singlecone" : 1.90,
-  "doublecone" : 2.80,
-  "onions" : 0.05,
-  "ketchup" : 0.05,
-  "tartarsauce" : 0.05
-};
